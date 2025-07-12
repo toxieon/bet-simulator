@@ -1,9 +1,19 @@
 const allMultis = [];
 
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("hidden");
+}
+function toggleSettings() {
+  document.getElementById("settings").classList.toggle("hidden");
+}
+function setTheme(mode) {
+  document.body.className = mode + "-mode";
+}
+
 function createLegHTML(leg, index) {
   const percent = Math.min((leg.current / leg.target) * 100, 100);
   const status = leg.current >= leg.target ? "✅ Complete" : "🔄 In Progress";
-  const aflLink = `https://www.afl.com.au/players?query=${encodeURIComponent(leg.name)}`;
+  const aflLink = `https://www.afl.com.au/players?query=${encodeURIComponent(leg.name.replace(' ', '+'))}`;
   return `
     <div class="leg">
       <div class="leg-details">
@@ -34,6 +44,7 @@ function renderMultis() {
     const legsHTML = multi.legs.map((leg, i) => createLegHTML(leg, i)).join("");
     container.innerHTML += `<div class="multi">${legsHTML}</div>`;
   });
+  updateMatchHeader();
 }
 
 function scanScreenshot() {
@@ -58,6 +69,12 @@ function simulateFetch() {
     });
   });
   renderMultis();
+}
+
+function updateMatchHeader() {
+  document.getElementById("game-info").innerText = "Fremantle vs Hawthorn – Round 18 – Sat 12 Jul 20:10 AEST";
+  document.getElementById("team-home-logo").src = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9d/Fremantle_FC_logo.svg/1200px-Fremantle_FC_logo.svg.png";
+  document.getElementById("team-away-logo").src = "https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Hawthorn_Football_Club_Logo.svg/1200px-Hawthorn_Football_Club_Logo.svg.png";
 }
 
 window.onload = renderMultis;

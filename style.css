@@ -1,11 +1,34 @@
-body, html {
+body {
   margin: 0;
-  padding: 0;
   font-family: Arial, sans-serif;
-  height: 100%;
+  transition: background 0.5s, color 0.5s;
+}
+
+body.light-mode {
+  background: #f9f9f9;
+  color: #000;
+}
+
+body.dark-mode {
+  background: #121212;
+  color: #fff;
+}
+
+body.sportsbet-mode {
   background: linear-gradient(270deg, #003366, #002244);
+  color: #fff;
   background-size: 400% 400%;
   animation: bg-animate 10s ease infinite;
+}
+
+body.pointsbet-mode {
+  background: #1e1b1c;
+  color: #fff;
+}
+
+body.bet365-mode {
+  background: #003300;
+  color: #fff;
 }
 
 @keyframes bg-animate {
@@ -20,7 +43,51 @@ body, html {
   padding: 20px;
   background: white;
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 100px;
+  color: black;
+}
+
+h1 {
+  text-align: center;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  z-index: 1000;
+}
+
+#header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.popup {
+  position: fixed;
+  top: 60px;
+  left: 10px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  z-index: 999;
+}
+
+.popup.hidden {
+  display: none;
 }
 
 .leg {
