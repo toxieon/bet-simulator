@@ -1,51 +1,63 @@
-const legs = [];
+const allMultis = [];
 
-function updateUI() {
-  const container = document.getElementById("multi-legs");
-  container.innerHTML = "";
-  legs.forEach((leg, i) => {
-    const percent = Math.min((leg.current / leg.target) * 100, 100);
-    const status = leg.current >= leg.target ? "✅ Complete" : "🔄 In Progress";
-    container.innerHTML += `
-      <div class="leg">
-        <strong>${leg.name} - ${leg.type}</strong><br/>
-        Target: <input type="number" value="${leg.target}" onchange="updateTarget(${i}, this.value)" /> 
-        Current: ${leg.current}
-        <div class="progress-container">
-          <div class="progress-bar" style="width: ${percent}%"></div>
+function createLegHTML(leg, index) {
+  const percent = Math.min((leg.current / leg.target) * 100, 100);
+  const status = leg.current >= leg.target ? "✅ Complete" : "🔄 In Progress";
+  const aflLink = `https://www.afl.com.au/players?query=${encodeURIComponent(leg.name)}`;
+  return `
+    <div class="leg">
+      <div class="leg-details">
+        <div style="display: flex; align-items: center;">
+          <div class="gurney" style="background:${leg.color || '#333'}">${leg.number || '?'}</div>
+          <strong>${leg.name} - ${leg.type}</strong>
         </div>
-        <div class="leg-status">${status}</div>
+        <a href="${aflLink}" class="link-icon" target="_blank">🔗</a>
       </div>
-    `;
-  });
+      Target: <input type="number" value="${leg.target}" onchange="updateTarget(${index}, this.value, ${allMultis.length - 1})"/> 
+      Current: ${leg.current}
+      <div class="progress-container">
+        <div class="progress-bar" style="width: ${percent}%"></div>
+      </div>
+      <div class="leg-status">${status}</div>
+    </div>`;
 }
 
-function updateTarget(index, newValue) {
-  legs[index].target = parseInt(newValue);
-  updateUI();
+function updateTarget(index, newValue, multiIndex) {
+  allMultis[multiIndex].legs[index].target = parseInt(newValue);
+  renderMultis();
 }
 
-function simulateFetch() {
-  legs.forEach(leg => {
-    if (leg.name === "Shai Bolton") leg.current = 13;
-    if (leg.name === "Dylan Moore") leg.current = 16;
-    if (leg.name === "Jack Gunston") leg.current = 1;
+function renderMultis() {
+  const container = document.getElementById("multi-wrapper");
+  container.innerHTML = "";
+  allMultis.forEach((multi, mIndex) => {
+    const legsHTML = multi.legs.map((leg, i) => createLegHTML(leg, i)).join("");
+    container.innerHTML += `<div class="multi">${legsHTML}</div>`;
   });
-  updateUI();
 }
 
 function scanScreenshot() {
-  // Simulated OCR logic — you can integrate Tesseract.js here
-  legs.length = 0;
-  legs.push({ name: "Shai Bolton", type: "Disposals", target: 15, current: 0 });
-  legs.push({ name: "Dylan Moore", type: "Disposals", target: 15, current: 0 });
-  legs.push({ name: "Jack Gunston", type: "Goals", target: 1, current: 0 });
-  updateUI();
-  document.getElementById("compare-btn").style.display = "inline-block";
+  // Simulate scanning
+  const legs = [
+    { name: "Shai Bolton", type: "Disposals", target: 15, current: 0, number: 29, color: "#552288" },
+    { name: "Dylan Moore", type: "Disposals", target: 15, current: 0, number: 36, color: "#111144" },
+    { name: "Josh Battle", type: "Disposals", target: 15, current: 0, number: 26, color: "#aa0000" },
+    { name: "Jack Gunston", type: "Goals", target: 1, current: 0, number: 19, color: "#663300" },
+  ];
+  allMultis.push({ legs });
+  renderMultis();
 }
 
-function compareToSportsBet() {
-  alert("This would now fetch live data from Sportsbet or AFL API and compare stats.");
+function simulateFetch() {
+  allMultis.forEach(multi => {
+    multi.legs.forEach(leg => {
+      if (leg.name === "Shai Bolton") leg.current = 13;
+      if (leg.name === "Dylan Moore") leg.current = 16;
+      if (leg.name === "Josh Battle") leg.current = 8;
+      if (leg.name === "Jack Gunston") leg.current = 1;
+    });
+  });
+  renderMultis();
 }
 
-window.onload = updateUI;
+window.onload = renderMultis;

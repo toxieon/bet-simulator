@@ -1,30 +1,79 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
+body, html {
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+  background: linear-gradient(270deg, #003366, #002244);
+  background-size: 400% 400%;
+  animation: bg-animate 10s ease infinite;
 }
+
+@keyframes bg-animate {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: auto;
-  background: white;
   padding: 20px;
+  background: white;
   border-radius: 10px;
+  margin-top: 30px;
 }
+
 .leg {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
 }
+
+.multi {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 3px dashed #0077cc;
+}
+
 .progress-container {
   background: #ddd;
-  border-radius: 5px;
+  border-radius: 30px;
   overflow: hidden;
+  height: 25px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
 }
+
 .progress-bar {
-  height: 20px;
-  background: #4caf50;
+  height: 100%;
+  background: #00c853;
   width: 0%;
   transition: width 0.3s ease;
+  border-radius: 30px;
 }
-.leg-status {
-  margin-top: 5px;
+
+.leg-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gurney {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: gray;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.link-icon {
+  margin-left: 10px;
+  text-decoration: none;
+  color: #0077cc;
 }

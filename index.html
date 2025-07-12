@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div class="container">
-    <h1>Sportsbet Style Multi Tracker</h1>
-    <input type="file" id="screenshot" accept="image/*" />
-    <button onclick="scanScreenshot()">📸 Scan Multi Screenshot</button>
-    <div id="multi-legs"></div>
-    <button onclick="simulateFetch()">🔄 Simulate Fetch Stats</button>
-    <button id="compare-btn" onclick="compareToSportsBet()" style="display: none;">🔍 Compare with Sportsbet</button>
+  <div class="animated-bg">
+    <div class="container">
+      <h1>Sportsbet Style Multi Tracker</h1>
+      <input type="file" id="screenshot" accept="image/*" multiple />
+      <button onclick="scanScreenshot()">📸 Scan Multi Screenshot(s)</button>
+      <div id="multi-wrapper"></div>
+      <button onclick="simulateFetch()">🔄 Simulate Fetch Stats</button>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
