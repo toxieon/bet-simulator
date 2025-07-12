@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multi Tracker</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Sportsbet Style Multi Tracker</h1>
+    <input type="file" id="screenshot" accept="image/*" />
+    <button onclick="scanScreenshot()">📸 Scan Multi Screenshot</button>
+    <div id="multi-legs"></div>
+    <button onclick="simulateFetch()">🔄 Simulate Fetch Stats</button>
+    <button id="compare-btn" onclick="compareToSportsBet()" style="display: none;">🔍 Compare with Sportsbet</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

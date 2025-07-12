@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.leg {
+  margin-bottom: 15px;
+}
+.progress-container {
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 20px;
+  background: #4caf50;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+.leg-status {
+  margin-top: 5px;
+}
