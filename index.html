@@ -2,42 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Multi Tracker</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Australian Betting Odds Comparator</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="sportsbet-mode">
-  <div id="header">
-    <div id="menu-btn" onclick="toggleMenu()">☰</div>
-    <div id="header-info">
-      <img id="team-home-logo" class="team-logo" src="" alt="Home Team"/>
-      <span id="game-info">Loading match info...</span>
-      <img id="team-away-logo" class="team-logo" src="" alt="Away Team"/>
-    </div>
-    <div id="settings-btn" onclick="toggleSettings()">⚙️</div>
-  </div>
-
-  <div id="menu" class="popup hidden">
-    <h3>Recent Scans</h3>
-    <ul id="recent-scans"></ul>
-  </div>
-
-  <div id="settings" class="popup hidden">
-    <h3>Theme Settings</h3>
-    <button onclick="setTheme('light')">☀️ Light</button>
-    <button onclick="setTheme('dark')">🌙 Dark</button>
-    <button onclick="setTheme('sportsbet')">🟦 Sportsbet</button>
-    <button onclick="setTheme('pointsbet')">🎯 PointsBet</button>
-    <button onclick="setTheme('bet365')">🟢 Bet365</button>
-  </div>
-
+<body>
   <div class="container">
-    <h1>Sportsbet Style Multi Tracker</h1>
-    <input type="file" id="screenshot" accept="image/*" multiple />
-    <button onclick="scanScreenshot()">📸 Scan Multi Screenshot(s)</button>
-    <div id="multi-wrapper"></div>
-    <button onclick="simulateFetch()">🔄 Simulate Fetch Stats</button>
+    <h1>Australian Betting Odds Comparator</h1>
+
+    <div class="section">
+      <label for="screenshot">Upload Screenshot (Sportsbet, TAB, Bet365, PointsBet):</label>
+      <input type="file" id="screenshot" accept="image/*" />
+      <img id="preview" class="preview-img" style="display: none;" />
+    </div>
+
+    <div class="section">
+      <label for="bookmaker">Or select bookmaker manually:</label>
+      <select id="bookmaker">
+        <option value="">-- Select Bookmaker --</option>
+        <option value="sportsbet">Sportsbet</option>
+        <option value="tab">TAB</option>
+        <option value="bet365">Bet365</option>
+        <option value="pointsbet">PointsBet</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <label for="game">Select Game:</label>
+      <select id="game">
+        <option value="">-- Select Game --</option>
+        <option value="geelong_vs_richmond">Geelong vs Richmond</option>
+        <option value="carlton_vs_essendon">Carlton vs Essendon</option>
+        <option value="collingwood_vs_melbourne">Collingwood vs Melbourne</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <button class="compare-btn" onclick="compareOdds()">Compare Odds</button>
+    </div>
+
+    <div class="section" id="comparisonResult"></div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
