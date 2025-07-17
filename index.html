@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Advanced AFL Betting Odds Comparator</title>
+  <title>AFL Betting Odds Comparator</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2/dist/tesseract.min.js"></script>
 </head>
 <body>
   <div class="container">
     <h1>Australian Betting Odds Comparator</h1>
 
     <div class="section">
-      <label for="screenshot">Upload Screenshot (e.g. Sportsbet Multi):</label>
+      <label for="screenshot">Optional: Upload a Screenshot of Your Multi</label>
       <input type="file" id="screenshot" accept="image/*" />
-      <img id="preview" class="preview-img" style="display: none;" />
+      <p><em>We'll attempt to auto-detect legs if uploaded.</em></p>
+      <img id="preview" class="preview-img" style="display:none;">
     </div>
 
     <div class="section">
-      <h3>Detected Multi (Editable)</h3>
-      <div id="multi-details">
-        <input type="text" id="game" placeholder="Detected Game (e.g., Essendon vs GWS GIANTS)">
-        <div id="legs">
-          <input type="text" value="Zach Merrett - 28+ Disposals" />
-          <input type="text" value="Archie Perkins - 14+ Disposals" />
-          <input type="text" value="Peter Wright - Anytime Goal Scorer" />
-          <input type="text" value="Archie Roberts - 24+ Disposals" />
-        </div>
-      </div>
+      <label for="gameSelect">Select AFL Game:</label>
+      <select id="gameSelect">
+        <option value="">Loading games...</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <h3>Build Your Multi</h3>
+      <div id="legs"></div>
+      <button id="addLegBtn" class="add-leg-btn">+ Add Leg</button>
     </div>
 
     <div class="section">
@@ -34,6 +36,7 @@
     </div>
 
     <div class="section" id="comparisonResult"></div>
+
   </div>
 
   <script src="script.js"></script>
