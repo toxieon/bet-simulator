@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Australian Betting Odds Comparator</title>
+  <title>Advanced AFL Betting Odds Comparator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -11,30 +11,22 @@
     <h1>Australian Betting Odds Comparator</h1>
 
     <div class="section">
-      <label for="screenshot">Upload Screenshot (Sportsbet, TAB, Bet365, PointsBet):</label>
+      <label for="screenshot">Upload Screenshot (e.g. Sportsbet Multi):</label>
       <input type="file" id="screenshot" accept="image/*" />
       <img id="preview" class="preview-img" style="display: none;" />
     </div>
 
     <div class="section">
-      <label for="bookmaker">Or select bookmaker manually:</label>
-      <select id="bookmaker">
-        <option value="">-- Select Bookmaker --</option>
-        <option value="sportsbet">Sportsbet</option>
-        <option value="tab">TAB</option>
-        <option value="bet365">Bet365</option>
-        <option value="pointsbet">PointsBet</option>
-      </select>
-    </div>
-
-    <div class="section">
-      <label for="game">Select Game:</label>
-      <select id="game">
-        <option value="">-- Select Game --</option>
-        <option value="geelong_vs_richmond">Geelong vs Richmond</option>
-        <option value="carlton_vs_essendon">Carlton vs Essendon</option>
-        <option value="collingwood_vs_melbourne">Collingwood vs Melbourne</option>
-      </select>
+      <h3>Detected Multi (Editable)</h3>
+      <div id="multi-details">
+        <input type="text" id="game" placeholder="Detected Game (e.g., Essendon vs GWS GIANTS)">
+        <div id="legs">
+          <input type="text" value="Zach Merrett - 28+ Disposals" />
+          <input type="text" value="Archie Perkins - 14+ Disposals" />
+          <input type="text" value="Peter Wright - Anytime Goal Scorer" />
+          <input type="text" value="Archie Roberts - 24+ Disposals" />
+        </div>
+      </div>
     </div>
 
     <div class="section">

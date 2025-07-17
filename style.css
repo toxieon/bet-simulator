@@ -1,19 +1,19 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  background: #f0f2f5;
   margin: 0;
   padding: 20px;
 }
 h1 {
   text-align: center;
-  color: #222;
+  color: #1a1a1a;
 }
 .container {
   max-width: 900px;
   margin: auto;
   background: white;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 .section {
   margin-bottom: 30px;
@@ -21,32 +21,33 @@ h1 {
 label {
   font-weight: bold;
 }
-select, input[type="file"] {
+input[type="file"],
+input[type="text"] {
   margin-top: 10px;
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
+  margin-bottom: 10px;
 }
 .preview-img {
   width: 100%;
   max-height: 400px;
   object-fit: contain;
-  margin-top: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 .compare-btn {
   padding: 15px 25px;
   font-size: 16px;
-  background-color: #2d89ef;
+  background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
 }
 .compare-btn:hover {
-  background-color: #1a5ec8;
+  background-color: #218838;
 }
 .comparison-table {
   width: 100%;
@@ -59,5 +60,9 @@ select, input[type="file"] {
   text-align: center;
 }
 .comparison-table th {
-  background-color: #eee;
+  background-color: #f8f8f8;
+}
+.best-odds {
+  background-color: #d4edda;
+  font-weight: bold;
 }
