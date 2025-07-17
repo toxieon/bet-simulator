@@ -7,26 +7,11 @@ const statOptions = [
   "30+ Disposals"
 ];
 
-const playerOptionsByGame = {};
-
-async function fetchFixtures() {
-  // Placeholder: Simulate AFL fixtures
-  const games = [
-    { id: "essendon_gws", name: "Essendon vs GWS GIANTS", players: ["Zach Merrett", "Archie Perkins", "Peter Wright", "Archie Roberts"] },
-    { id: "carlton_essendon", name: "Carlton vs Essendon", players: ["Sam Walsh", "Patrick Cripps", "Charlie Curnow", "Zach Merrett"] },
-    { id: "geelong_richmond", name: "Geelong vs Richmond", players: ["Patrick Dangerfield", "Tom Stewart", "Jeremy Cameron", "Dustin Martin"] }
-  ];
-
-  const select = document.getElementById("gameSelect");
-  select.innerHTML = '<option value="">-- Select Game --</option>';
-  games.forEach(game => {
-    const opt = document.createElement("option");
-    opt.value = game.id;
-    opt.textContent = game.name;
-    select.appendChild(opt);
-    playerOptionsByGame[game.id] = game.players;
-  });
-}
+const playerOptionsByGame = {
+  essendon_gws: ["Zach Merrett", "Archie Perkins", "Peter Wright", "Archie Roberts"],
+  carlton_essendon: ["Sam Walsh", "Patrick Cripps", "Charlie Curnow", "Zach Merrett"],
+  geelong_richmond: ["Patrick Dangerfield", "Tom Stewart", "Jeremy Cameron", "Dustin Martin"]
+};
 
 document.getElementById("gameSelect").addEventListener("change", () => {
   document.getElementById("legs").innerHTML = "";
@@ -48,7 +33,34 @@ document.getElementById("addLegBtn").addEventListener("click", () => {
   document.getElementById("legs").appendChild(legDiv);
 });
 
-async function compareOdds() {
+document.getElementById("screenshot").addEventListener("change", function (e) {
+  const file = e.target.files[0];
+  const outputList = document.getElementById("ocrLegs");
+  outputList.innerHTML = "<li><em>Processing screenshot...</em></li>";
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (evt) {
+      Tesseract.recognize(evt.target.result, 'eng').then(({ data: { text } }) => {
+        const lines = text.split("\n").map(l => l.trim()).filter(l => l);
+        outputList.innerHTML = "";
+        let count = 0;
+        lines.forEach(line => {
+          if (/\d+\+ Disposals|Goal Scorer/i.test(line)) {
+            const li = document.createElement("li");
+            li.textContent = line;
+            outputList.appendChild(li);
+            count++;
+          }
+        });
+        if (count === 0) outputList.innerHTML = "<li><em>No bet legs detected.</em></li>";
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+function compareOdds() {
   const legDivs = document.querySelectorAll("#legs div");
   if (legDivs.length === 0) {
     alert("Please add at least one leg.");
@@ -60,7 +72,6 @@ async function compareOdds() {
     stat: div.querySelector(".stat").value
   }));
 
-  // Placeholder simulated API odds data
   const oddsData = {
     Sportsbet: [1.85, 1.90, 1.88, 2.00],
     TAB: [1.80, 1.91, 1.89, 1.95],
@@ -94,27 +105,3 @@ async function compareOdds() {
   tableHTML += "</table>";
   document.getElementById("comparisonResult").innerHTML = tableHTML;
 }
-
-document.getElementById("screenshot").addEventListener("change", function (e) {
-  const file = e.target.files[0];
-  const preview = document.getElementById("preview");
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (evt) {
-      preview.src = evt.target.result;
-      preview.style.display = 'block';
-      Tesseract.recognize(
-        evt.target.result,
-        'eng',
-        { logger: m => console.log(m) }
-      ).then(({ data: { text } }) => {
-        console.log("OCR Result:", text);
-        // Placeholder logic: show OCR output in console
-        // You could map player/stat names using AI or regex
-      });
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-window.onload = fetchFixtures;

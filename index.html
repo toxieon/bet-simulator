@@ -12,17 +12,24 @@
     <h1>Australian Betting Odds Comparator</h1>
 
     <div class="section">
-      <label for="screenshot">Optional: Upload a Screenshot of Your Multi</label>
+      <label for="screenshot">Optional: Upload Screenshot</label>
       <input type="file" id="screenshot" accept="image/*" />
-      <p><em>We'll attempt to auto-detect legs if uploaded.</em></p>
-      <img id="preview" class="preview-img" style="display:none;">
+      <p><em>We'll extract bet legs if possible and display them below.</em></p>
     </div>
 
     <div class="section">
       <label for="gameSelect">Select AFL Game:</label>
       <select id="gameSelect">
-        <option value="">Loading games...</option>
+        <option value="">-- Select Game --</option>
+        <option value="essendon_gws">Essendon vs GWS GIANTS</option>
+        <option value="carlton_essendon">Carlton vs Essendon</option>
+        <option value="geelong_richmond">Geelong vs Richmond</option>
       </select>
+    </div>
+
+    <div class="section">
+      <h3>Detected Bet Legs (from Screenshot)</h3>
+      <ul id="ocrLegs"></ul>
     </div>
 
     <div class="section">
@@ -37,8 +44,6 @@
 
     <div class="section" id="comparisonResult"></div>
 
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

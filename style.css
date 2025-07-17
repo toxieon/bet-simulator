@@ -6,7 +6,6 @@ body {
 }
 h1 {
   text-align: center;
-  color: #1a1a1a;
 }
 .container {
   max-width: 900px;
@@ -58,9 +57,6 @@ select, input[type="file"] {
   background-color: #d4edda;
   font-weight: bold;
 }
-.preview-img {
-  max-width: 100%;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+ul#ocrLegs {
+  padding-left: 20px;
 }
